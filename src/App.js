@@ -3,6 +3,7 @@ import allMovies from './data'
 import categories from './categories'
 import ageCategories from './age'
 import Movie from './components/Movie'
+import Button from './components/Button'
 
 const App = () => {
   const [state, setState] = useState(true)
@@ -13,36 +14,20 @@ const App = () => {
   const filteredCategories = allMovies.filter(oneMovie => oneMovie["category"] === typeOfMovie)
   const filteredAge = allMovies.filter(oneMovie => oneMovie["age"] === age)
 
+  const setCategories = () => {
+    setState(true)
+    setAll(false)
+  }
+
+  const setAges = () => {
+    setState(false)
+    setAll(false)
+  }
+
   return <div className='bg-black'>
     {/*BUTTONS*/}
-    <div className='flex flex-row justify-center'>
-      {
-        categories.map((oneCategory, index) => {
-          return <button
-            key={index}
-            className='w-[150px] text-white bg-[#e50914] p-1 cursor-pointer'
-            onClick={() => {
-              setTypeOfMovie(oneCategory)
-              setState(true)
-              setAll(false)
-            }}>{oneCategory}</button>
-        })
-      }
-    </div>
-    <div className='flex flex-row justify-center'>
-      {
-        ageCategories.map((oneAge, index) => {
-          return <button
-            key={index}
-            className='w-[150px] text-white bg-[#e50914] p-1 cursor-pointer'
-            onClick={() => {
-              setAge(oneAge)
-              setState(false)
-              setAll(false)
-            }}>{oneAge}</button>
-        })
-      }
-    </div>
+    <Button category={categories} setStates={setCategories} setCategory={setTypeOfMovie} />
+    <Button category={ageCategories} setStates={setAges} setCategory={setAge} />
     <div className='flex flex-row justify-center'>
       <button
         className='w-[150px] text-white bg-[#e50914] p-1 cursor-pointer'
@@ -54,13 +39,13 @@ const App = () => {
     </div>
 
     {/* MOVIES */}
-    { 
-      all ? 
-      <div className='w-[90%] flex flex-row justify-center flex-wrap my-10 mx-auto'>
-        {
-          allMovies.map(oneMovie => <Movie key={oneMovie.id} {...oneMovie} />)
-        }
-      </div> : <div></div>
+    {
+      all ?
+        <div className='w-[90%] flex flex-row justify-center flex-wrap my-10 mx-auto'>
+          {
+            allMovies.map(oneMovie => <Movie key={oneMovie.id} {...oneMovie} />)
+          }
+        </div> : <div></div>
     }
     {
       state ? <div className='w-[90%] flex flex-row justify-center flex-wrap my-10 mx-auto'>
@@ -68,7 +53,7 @@ const App = () => {
           filteredCategories.map(oneMovie => <Movie key={oneMovie.id} {...oneMovie} />)
         }
       </div> : <div className='w-[90%] flex flex-row justify-center flex-wrap my-10 mx-auto'>
-        { 
+        {
           filteredAge.map(oneMovie => <Movie key={oneMovie.id} {...oneMovie} />)
         }
       </div>
