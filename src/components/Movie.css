@@ -1,0 +1,22 @@
+.one-movie {
+    width: 300px;
+    box-shadow: 0px 0px 20px black;
+    color: rgb(249, 246, 246);
+    margin: 10px 5px;
+    transition: all 0.5s linear;
+  }
+  
+  .one-movie:hover {
+    transform: scale(1.04);
+  }
+  
+  .one-movie img {
+    height: 170px;
+    width: 300px;
+  }
+  
+  .one-movie h2, .one-movie p {
+    padding-left: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
