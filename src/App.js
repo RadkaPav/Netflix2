@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import allMovies from './data';
-import categories from './categories';
-import age from './age';
-import Movie from './components/Movie';
+import React, { useState } from 'react'
+import allMovies from './data'
+import categories from './categories'
+import age from './age'
+import Movie from './components/Movie'
 
 
 const App = () => {
@@ -10,7 +10,7 @@ const App = () => {
   const [all, setAll] = useState(true)
   //filtrování podle kategorie
   const [typeOfMovie, setTypeOfMovie] = useState("")
-  const filteredMovies = allMovies.filter( (oneMovie) => {
+  const filteredMovies = allMovies.filter((oneMovie) => {
     return oneMovie["category"] === typeOfMovie
   })
 
@@ -24,64 +24,69 @@ const App = () => {
     {/* tlačítka na filtrování podle kategorie */}
     <div className='flex flex-row justify-center'>
       {
-        categories.map( (oneCategory, index) => {
-          return  <button key={index} onClick={() => {
-            setTypeOfMovie(oneCategory)
-            setState(true)
-            setAll(false)
-            }} className='w-[150px] text-white bg-[#e50914] p-1 cursor-pointer'>
-                      {oneCategory}
-                  </button>
+        categories.map((oneCategory, index) => {
+          return <button key={index} className='w-[150px] text-white bg-[#e50914] p-1 cursor-pointer'
+            onClick={() => {
+              setTypeOfMovie(oneCategory)
+              setState(true)
+              setAll(false)
+            }}>{oneCategory}</button>
         })
       }
     </div>
-    
+
     {/* tlačítka na filtrování podle věku */}
     <div className='flex flex-row justify-center'>
       {
         age.map((oneAge, index) => {
-          return <button key={index} onClick={() => {
-            setChild(oneAge)
-            setState(false)
-            setAll(false)
-          }} className='w-[150px] text-white bg-[#e50914] p-1 cursor-pointer'>{oneAge}</button>
+          return <button key={index} className='w-[150px] text-white bg-[#e50914] p-1 cursor-pointer'
+            onClick={() => {
+              setChild(oneAge)
+              setState(false)
+              setAll(false)
+            }}>{oneAge}</button>
         })
       }
     </div>
     <div className='flex flex-row justify-center'>
-      <button onClick={() => setAll(true)} className='w-[150px] text-white bg-[#e50914] p-1 cursor-pointer'>Vypsat všechny filmy</button>
+      <button className='w-[150px] text-white bg-[#e50914] p-1 cursor-pointer'
+       onClick={() => {
+        setAll(true)
+        setChild("")
+        setTypeOfMovie("")
+        }}>Vypsat všechny filmy</button>
     </div>
 
-    
-       { /* vypsání všech filmů*/
-      all? <div className='w-[90%] flex flex-row justify-center flex-wrap my-10 mx-auto'>
-      {
-      allMovies.map((oneMovie) => {
-        return <Movie key={oneMovie.id} {...oneMovie} />
-      })
-      }
-    </div> : <div></div>
+
+    { /* vypsání všech filmů*/
+      all ? <div className='w-[90%] flex flex-row justify-center flex-wrap my-10 mx-auto'>
+        {
+          allMovies.map((oneMovie) => {
+            return <Movie key={oneMovie.id} {...oneMovie} />
+          })
+        }
+      </div> : <div></div>
     }
-       {
+    {
       /* vypsání vyfiltrovaných filmů podle kategorie*/
-      state?  <div className='w-[90%] flex flex-row justify-center flex-wrap my-10 mx-auto'>
-       {
-      filteredMovies.map((oneMovie) => {
-        return <Movie key={oneMovie.id} {...oneMovie}/>
-      })
-      }
-    </div> : <div className='w-[90%] flex flex-row justify-center flex-wrap my-10 mx-auto'>
-      { /* vypsání vyfiltrovaných filmů podle věku*/
-       ageMovies.map((oneMovie) => {
-        return <Movie key={oneMovie.id} {...oneMovie}/>
-      })
-      }
-   </div>
+      state ? <div className='w-[90%] flex flex-row justify-center flex-wrap my-10 mx-auto'>
+        {
+          filteredMovies.map((oneMovie) => {
+            return <Movie key={oneMovie.id} {...oneMovie} />
+          })
+        }
+      </div> : <div className='w-[90%] flex flex-row justify-center flex-wrap my-10 mx-auto'>
+        { /* vypsání vyfiltrovaných filmů podle věku*/
+          ageMovies.map((oneMovie) => {
+            return <Movie key={oneMovie.id} {...oneMovie} />
+          })
+        }
+      </div>
     }
-   
-   
-       
-    </div>
+
+
+
+  </div>
 }
 
 export default App
