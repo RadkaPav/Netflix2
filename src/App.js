@@ -24,13 +24,14 @@ const App = () => {
     setAll(false)
   }
 
-  return <div className='bg-black'>
+  return <div className='bg-black mt-5'>
     {/*BUTTONS*/}
-    <Button category={categories} setStates={setCategories} setCategory={setTypeOfMovie} />
-    <Button category={ageCategories} setStates={setAges} setCategory={setAge} />
+
+    <Button category={categories} setStates={setCategories} setCategory={setTypeOfMovie} title="Žánr" />
+    <Button category={ageCategories} setStates={setAges} setCategory={setAge} title="Věk" />
     <div className='flex flex-row justify-center'>
       <button
-        className='w-[150px] text-white bg-[#e50914] p-1 cursor-pointer'
+        className='w-[150px] text-white bg-[#e50914] p-1 cursor-pointer rounded mt-2'
         onClick={() => {
           setAll(true)
           setAge("")
